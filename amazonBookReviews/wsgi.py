@@ -1,5 +1,5 @@
 """
-WSGI config for Book_review project.
+WSGI config for amazonBookReviews project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Book_review.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'amazonBookReviews.settings')
 
 application = get_wsgi_application()

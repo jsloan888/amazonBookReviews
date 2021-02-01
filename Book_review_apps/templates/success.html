@@ -8,12 +8,44 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
+    <nav class="navbar-header">
+        <div>
+            <div class="navbar-header">
+            <a class="navbar-brand" href="/dashboard">Home</a>
+            </div>
+            <ul class="nav">
+            <li class ="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
+            <li class ="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         <div class="row">
             <div class="col-sm-8 h1">Welcome, {{user.f_name}}!</div>
-            <div class="col-sm-4">
-                <a href="/logout">Log Out</a>
+            <p class="col-sm-8">Reviews Go Here</p>
+            {% for review in all_reviews %}
+            {% endfor %}
+            <a href="review/like">Like</a>
+            <div class="likes">
+                {% if likes %}
+                <label>{like.number} Likes</label>
+                {% endif %}
             </div>
-        </div>
+            <div>
+                <form class="form-submission">
+                    <label>Comment:</label>
+                    <textarea type="" name=""></textarea>
+                    <button>Submit</button>
+                </form>
+                <div>
+                    {% if comments %}
+                    {% for comment in comments %}
+                        <h5>{{comment.poster.f_name}} Says:</h5>
+                        <p>{{comment.content}}</p>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+                </div>
     </div>
 </body>
