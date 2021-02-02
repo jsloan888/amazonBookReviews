@@ -11,25 +11,25 @@
     <nav class="navbar-header">
         <div>
             <div class="navbar-header">
-            <a class="navbar-brand" href="/dashboard">Home</a>
+            <a class="navbar-brand" href="/success">Home</a>
             </div>
             <ul class="nav">
-            <li class ="nav-item"><a class="nav-link disabled" href="/profile">Profile</a></li>
+            <li class ="nav-item"><a class="nav-link disabled" href="/profile/{{userid}}">Profile</a></li>
             <li class ="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
             </ul>
         </div>
     </nav>
     <div>
-        <h1>{user.f_name}'s Profile</h1>
+        <h1>{{user.f_name}}'s Profile</h1>
         <p>See your Reviews Below</p>
-        <div>
-            <h5>{Review Name Goes Here}</h5>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur corrupti temporibus mollitia cumque libero labore eligendi sint quis accusantium ea quia consectetur neque provident, fugit, voluptatibus officia alias quo laborum!</p>
-            <p class="likes">{number of likes} Likes</p>
-            <p class="comments"></p>
-            <a href="delete/comment">Delete</a>
-            <a href="/review/edit">Edit this Review</a>
-        </div>
+            <div>
+                <h5>{Review Name Goes Here}</h5>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur corrupti temporibus mollitia cumque libero labore eligendi sint quis accusantium ea quia consectetur neque provident, fugit, voluptatibus officia alias quo laborum!</p>
+                <p class="likes">{number of likes} Likes</p>
+                <p class="comments"></p>
+                <a href="delete/comment">Delete</a>
+                <a href="/review/{{bookid}}/edit">Edit this Review</a>
+            </div>
     </div>
 </body>
 </html>

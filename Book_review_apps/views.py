@@ -48,3 +48,20 @@ def login(request):
 def logout(request):
     request.session.clear()
     return redirect('/')
+
+def profile(request, userid):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    context = {
+        'user' : User.objects.get(id=userid)
+    }
+    return render(request, 'profile.html', context)
+
+def reviewEdit(request, bookid):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    context = {
+        'user' : User.objects.get(id=request.session['user_id']),
+        'review' : Book.objects.filter(posted_by=request.session['user_id'])
+    }
+    return render(request, 'reviewEdit.html', context)
