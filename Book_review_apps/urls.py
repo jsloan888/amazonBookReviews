@@ -7,6 +7,11 @@ urlpatterns = [
     path('success', views.success),
     path('register', views.register),
     path('profile/<int:userid>', views.profile),
-    path('review/<int:bookid>edit', views.reviewEdit)
+    path('review/<int:bookid>edit', views.reviewEdit),
+    path('profile/<int:userid>/create', views.createReview),
+    path('profile/<int:userid>/<bookid>/edit', views.editReview),
+    path('profile/<int:userid>/<bookid>/like', views.like),
+    path('profile/<int:userid>/<bookid>/comment', views.comment),
+    path('profile/<int:userid>/<bookid>/likeComment', views.likeComment),
+    path('profile/<int:userid>/<commentid>/deleteComment', views.deleteComment)
 ]
-
