@@ -1,35 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>user Profile</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">  
 </head>
 <body>
-    <nav class="navbar-header">
-        <div>
-            <div class="navbar-header">
-            <a class="navbar-brand" href="/success">Home</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="/success">Home</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                      <ul class="navbar-nav">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="customerservice">Customer Service <span class="sr-only"></span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/profile/{{user.id}}">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="register">Register</a>
+                          </li>
+                        <li>
+                          <a class="nav-link" href="logout">Logout</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </nav>
             </div>
-            <ul class="nav">
-            <li class ="nav-item"><a class="nav-link disabled" href="/profile/{{userid}}">Profile</a></li>
-            <li class ="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
-            </ul>
         </div>
-    </nav>
-    <div>
+    </div>
+    <div id='wrap'>
         <h1>{{user.f_name}}'s Profile</h1>
-        <p>See your Reviews Below</p>
-            <div>
-                <h5>{Review Name Goes Here}</h5>
+        <a href="/success" class="btn btn-secondary">Go Back</a>
+        <div id='posts'>
+        <div id='write'>
+        </div>
+        <div class='one_post'>
+            <h2>Reviews</h2>
+            {Review Name Goes Here}
+            <div id='posts'>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur corrupti temporibus mollitia cumque libero labore eligendi sint quis accusantium ea quia consectetur neque provident, fugit, voluptatibus officia alias quo laborum!</p>
+                <p class='poster'>Review By: {{post.poster.first_name}} {{post.poster.last_name}} {{post.created_at}}</a></p>
                 <p class="likes">{number of likes} Likes</p>
-                <p class="comments"></p>
                 <a href="delete/comment">Delete</a>
                 <a href="/review/{{bookid}}/edit">Edit this Review</a>
             </div>
-    </div>
+        </div>
+        <div class='one_post'>
+            <h2>Comments:</h2>
+            
+            <div id='posts'>
+                <p>{{comment.comment}}</p>
+                <p class='poster'>Posted by: {{comment.poster.first_name}} {{comment.poster.last_name}} {{comment.created_at}}</p>
+                <a class='poster' href="/delete/{{comment.id}}">Delete Comment</a>
+            </div>
+            
+        </div>
 </body>
 </html>
