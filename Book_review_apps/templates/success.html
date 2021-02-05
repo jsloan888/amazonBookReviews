@@ -51,9 +51,9 @@
                 {% endif %}
             </div>
             <div>
-                <form class="form-submission">
+                <form action="/profile/<int:userid>/<bookid>/comment" class="form-submission" method="POST">
                     <label>Comment:</label>
-                    <textarea type="" name=""></textarea>
+                    <textarea type="submit" name="comment"></textarea>
                     <button>Submit</button>
                 </form>
                 <div>
