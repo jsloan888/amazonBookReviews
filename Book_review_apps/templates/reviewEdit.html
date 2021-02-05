@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>review edit page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar-header">
+        <div>
+            <div class="navbar-header">
+            <a class="navbar-brand" href="/success">Home</a>
+            </div>
+            <ul class="nav">
+            <li class ="nav-item"><a class="nav-link" href="/profile/{{userid}}">Profile</a></li>
+            <li class ="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div>
+        <form action="review/update" method="POST">
+            <label>Edit Review: </label>
+            <input>
+            <label></label>
+            <input>
+        </form>
+    </div>
+    <div class="comments">
+        % for comment in review_comments %
+            <p class="comments"><label>{comment.poster.f_name}: </label> {comment.content}</p>
+            <a href="comment/id/delete">Delete Comment</a>
+        % endfor %
+    </div>
+</body>
+</html>
