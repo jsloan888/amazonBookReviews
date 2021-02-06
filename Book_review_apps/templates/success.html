@@ -43,26 +43,30 @@
             <!-- THE SQL WILL ALSO NEED COMMENTS FOR EACH REVIEW -->
             <!-- THIS WILL BE LIKE A FACEBOOK WALL PAGE -->
             {% for review in all_reviews %}
-            {% endfor %}
             <a href="review/like">Like</a>
-            <div class="likes">
-                {% if likes %}
-                <label>{like.number} Likes</label>
-                {% endif %}
-            </div>
-            <div>
-                <form action="/profile/<int:userid>/<bookid>/comment" method="POST">
-                    <h4>Add a Comment:</h4> <br><textarea type="submit" name="comment"></textarea><br>
-                    <button>Submit</button>
-                </form>
-                <div>
-                    {% if comments %}
-                    {% for comment in comments %}
-                        <h5>{{comment.poster.f_name}} Says:</h5>
-                        <p>{{comment.content}}</p>
-                    {% endfor %}
+                <div class="review-feed">
+                    <h5>{{review.title}} reviewed by {{review.posted_by.f_name}}</h5>
+                    <p>{{review.description}}</p>
+                </div>
+                <div class="likes">
+                    {% if likes %}
+                    <label>{like.number} Likes</label>
                     {% endif %}
                 </div>
-            </div>
+                <div>
+                    <form action="/profile/<int:userid>/<bookid>/comment" method="POST">
+                        <h4>Add a Comment:</h4> <br><textarea type="submit" name="comment"></textarea><br>
+                        <button>Submit</button>
+                    </form>
+                    <div>
+                        {% if comments %}
+                        {% for comment in comments %}
+                            <h5>{{comment.poster.f_name}} Says:</h5>
+                            <p>{{comment.content}}</p>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
     </div>
 </body>
