@@ -11,7 +11,8 @@ def success(request):
     if 'user_id' not in request.session:
         return redirect('/')
     context = {
-        "user": User.objects.get(id=request.session['user_id'])
+        "user": User.objects.get(id=request.session['user_id']),
+        "all_reviews": Book.objects.all()
     }
     return render(request, 'success.html', context)
         
