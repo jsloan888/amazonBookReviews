@@ -33,17 +33,18 @@
             </div>
         </div>
     </div>
-    <h5>{{user.f_name}}, you can post your review here:</h5>
-    <div>
-        <form action="/profile/{{user.id}}/create" method="POST">
-            {% csrf_token %}
-            <label>Book Title:</label>
-            <input type="text" name="name">
-            <label>What did you think of the book?</label>
-            <textarea name="desc" rows="5" cols="35"></textarea>
-            <button type="submit">Post Review</button>
-        </form>
-        <!-- THIS PAGE NEEDS STYLING -->
+    <div id="addreview">
+      <h4>{{user.f_name}}, you can post your review here:</h4>
+      <div>
+          <form action="/profile/{{user.id}}/create" method="POST">
+              {% csrf_token %}
+              <h5>Book Title:<Title></Title> <input type="text" name="name" cols='35'></h5>
+              <h5>Your Thought:</h5><textarea name="desc" rows="5" cols="55"></textarea><br>
+              <button type="submit">Post Review</button>
+          </form>
+          <!-- THIS PAGE NEEDS STYLING -->
+          <!-- # Vick, I did a little just straighen the website definitely still needs more -->
+      </div>
     </div>
 </body>
 </html>

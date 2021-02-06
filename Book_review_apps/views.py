@@ -44,7 +44,6 @@ def login(request):
         request.session['user_id'] = existing.id
         return redirect('/success')
 
-
 def logout(request):
     request.session.clear()
     return redirect('/')
@@ -88,39 +87,60 @@ def createReview(request, userid):
 
 #do we need to add timestamp to views?
 
-def editReview(request, userid, bookid):
-    bookUpdate = Book.objects.get(id=bookid)
-    bookUpdate.description = request.POST['desc']
-    bookUpdate.title = request.POST['name']
-    bookUpdate.save()
-    return redirect(f'profile/{userid}')
+def editReview(request,bookid):
+    # bookUpdate = Book.objects.get(id=bookid)
+    # bookUpdate.description = request.POST['desc']
+    # bookUpdate.title = request.POST['name']
+    # bookUpdate.save()
+    # return redirect(f'profile/{userid}')
 
-def like(request, userid, bookid):
-    liked_book = Book.objects.get(id=bookid)
-    liked_book.liked_by = request.session['userid']
-    liked_book.save()
-    return redirect(f'profile/{userid}')
-
-def comment(request, userid, bookid):
-    user = User.objects.get(id=userid)
-    if request.method == 'POST':
-        comment = Comment.objects.create(
-           content=request.POST['content'],
-           poster=user
-        )
-        return redirect(f'profile/{userid}')
-    return redirect('/')
-
-def likeComment(request, userid, bookid):
-    liked_comment = Comment.objects.get(id=bookid)
-    liked_comment.liked_by = request.session['userid']
-    liked_comment.save()
-    return redirect(f'profile/{userid}')
-
-def deleteComment(request, userid, commentid):
-    if 'userid' not in request.session:
+    if 'user_id' not in request.session:
         return redirect('/')
-    comment = Comment.objects.get(id=commentid)
-    if comment.posted_by.id == request.session['userid']:
-        comment.delete()
-    return redirect(f'profile/{userid}')
+    review = Book.objects.get(id=bookid)
+    review.title = request.POST['title']
+    review.description = request.POST['description']
+    review = review.save()
+    return redirect(f"/profile/{request.session ['user_id']}")
+     
+def deletereview(request,bookid):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    review = Book.objects.get(id=bookid)
+    if review.posted_by.id == request.session['user_id']:
+        review.delete()
+    return redirect(f"/profile/{request.session ['user_id']}")
+
+def revieweEdit(request, bookid):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    return render(request, 'reviewEdit.html')
+
+# def like(request, userid, bookid):
+#     liked_book = Book.objects.get(id=bookid)
+#     liked_book.liked_by = request.session['userid']
+#     liked_book.save()
+#     return redirect(f'profile/{userid}')
+
+# def comment(request, userid, bookid):
+#     user = User.objects.get(id=userid)
+#     if request.method == 'POST':
+#         comment = Comment.objects.create(
+#            content=request.POST['content'],
+#            poster=user
+#         )
+#         return redirect(f'profile/{userid}')
+#     return redirect('/')
+
+# def likeComment(request, userid, bookid):
+#     liked_comment = Comment.objects.get(id=bookid)
+#     liked_comment.liked_by = request.session['userid']
+#     liked_comment.save()
+#     return redirect(f'profile/{userid}')
+
+# def deleteComment(request, userid, commentid):
+#     if 'userid' not in request.session:
+#         return redirect('/')
+#     comment = Comment.objects.get(id=commentid)
+#     if comment.posted_by.id == request.session['userid']:
+#         comment.delete()
+#     return redirect(f'profile/{userid}')
