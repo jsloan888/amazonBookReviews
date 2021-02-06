@@ -39,6 +39,9 @@
         <div class="row">
             <div class="col-sm-8 h1">Welcome, {{user.f_name}}!</div>
             <p class="col-sm-8">Reviews Go Here</p>
+            <!-- BELOW SQL IS NOT WORKING, PROBABLY BECAUSE OF CONTENT -->
+            <!-- THE SQL WILL ALSO NEED COMMENTS FOR EACH REVIEW -->
+            <!-- THIS WILL BE LIKE A FACEBOOK WALL PAGE -->
             {% for review in all_reviews %}
             {% endfor %}
             <a href="review/like">Like</a>
