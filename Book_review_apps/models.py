@@ -73,7 +73,7 @@ class User(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=255)
+    description = models.CharField(max_length=255) #the review content
     posted_by = models.ForeignKey(
         User, related_name="books_posted", on_delete=models.CASCADE)
     liked_by = models.ManyToManyField(User, related_name="books_liked")
