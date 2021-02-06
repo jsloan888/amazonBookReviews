@@ -34,11 +34,11 @@
         </div>
     </div>
     <div>
-        <form action="review/update" method="POST">
-            <label>Edit Review: </label>
-            <input>
-            <label></label>
-            <input>
+        <form action="/review/{{user.id}}/reviewEdit" method="POST">
+            {% csrf_token %}
+            <h4>Book Title:<Title></Title> <input type="text" name="title" cols='35'></h4>
+            <h4>Your Thought:</h4><textarea name="description" rows="5" cols="35"></textarea><br>
+            <button type="submit">Post Review</button>
         </form>
     </div>
     <div class="comments">

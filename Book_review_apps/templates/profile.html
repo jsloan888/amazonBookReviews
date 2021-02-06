@@ -51,7 +51,7 @@
                 <p class='poster'>Review By: {{review.posted_by.f_name}} {{review.posted_by.l_name}} {{review.created_at}}</p>
                 <p>{{review.description}}</p>
                 <p class="likes">{number of likes} Likes</p>
-                <a href="">Delete this Review</a>
+                <a href="/review/{{review.id}}">Delete this Review</a>
                 <a href="/review/{{review.id}}/edit">Edit this Review</a>
                 <div class='one_post'>
                   <h5>Comments:</h5>
