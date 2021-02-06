@@ -53,9 +53,18 @@ def profile(request, userid):
     if 'user_id' not in request.session:
         return redirect('/')
     context = {
-        'user' : User.objects.get(id=userid)
+        'user' : User.objects.get(id=userid),
+        'reviews' : Book.objects.all()
     }
     return render(request, 'profile.html', context)
+
+def new(request, userid):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    context = {
+        'user' : User.objects.get(id=request.session['user_id'])
+    }
+    return render(request, 'new.html', context)
 
 def reviewEdit(request, bookid):
     if 'user_id' not in request.session:
@@ -74,7 +83,7 @@ def createReview(request, userid):
            description=request.POST['desc'],
            posted_by=user
         )
-        return redirect(f'profile/{userid}')
+        return redirect(f'/profile/{userid}')
     return redirect('/')
 
 #do we need to add timestamp to views?

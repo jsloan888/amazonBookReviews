@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>user Profile</title>
+    <title>New Review</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">  
 </head>
 <body>
     <div class="container">
@@ -36,34 +33,16 @@
             </div>
         </div>
     </div>
-    <div id='wrap'>
-        <h1>{{user.f_name}}'s Profile</h1>
-        <a href="/success" class="btn btn-secondary">Go Back</a>
-        <div id='posts'>
-        <div id='write'>
-        </div>
-        <div class='one_post'>
-          <h2>Reviews</h2>
-            <div id='posts'>
-              {% for review in reviews %}
-              {% if review.posted_by.id == user.id %}
-              {{review.title}}
-                <p class='poster'>Review By: {{review.posted_by.f_name}} {{review.posted_by.l_name}} {{review.created_at}}</p>
-                <p>{{review.description}}</p>
-                <p class="likes">{number of likes} Likes</p>
-                <a href="">Delete this Review</a>
-                <a href="/review/{{review.id}}/edit">Edit this Review</a>
-                <div class='one_post'>
-                  <h5>Comments:</h5>
-                  <div id='posts'>
-                      <p>{{comment.comment}}</p>
-                      <p class='poster'>Posted by: {{comment.poster.first_name}} {{comment.poster.last_name}} {{comment.created_at}}</p>
-                      <a class='poster' href="/delete/{{comment.id}}">Delete Comment</a>
-                  </div>
-                </div>
-              {% endif %}
-              {% endfor %}
-            </div>
-        </div>
+    <h5>{{user.f_name}}, you can post your review here:</h5>
+    <div>
+        <form action="/profile/{{user.id}}/create" method="POST">
+            {% csrf_token %}
+            <label>Book Title:</label>
+            <input type="text" name="name">
+            <label>What did you think of the book?</label>
+            <textarea name="desc" rows="5" cols="35"></textarea>
+            <button type="submit">Post Review</button>
+        </form>
+    </div>
 </body>
 </html>
