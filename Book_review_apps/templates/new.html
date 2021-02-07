@@ -8,33 +8,30 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="navbar-brand" href="/success">Home</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                      <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                      <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/profile/{{user.id}}">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/new/review/{{user.id}}">Post a New Review</a>
-                          </li>
-                        <li>
-                          <a class="nav-link" href="/logout">Logout</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </nav>
-            </div>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="/success">Home</a>
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile/{{user.id}}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/new/review/{{user.id}}">Post a New Review</a>
+                      </li>
+                    <li>
+                      <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
         </div>
     </div>
+  </div>
     <div id="addreview">
       <h4>{{user.f_name}}, you can post your review here:</h4>
+      <p>Post the latest book you read. Did you like it?</p>
       <div>
           <form action="/profile/{{user.id}}/create" method="POST">
               {% csrf_token %}

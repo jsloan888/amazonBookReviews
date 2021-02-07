@@ -82,9 +82,11 @@ class Book(models.Model):
     objects = BookManager()
 
 class Comment(models.Model):
-    content = models.TextField
+    content = models.TextField()
     poster = models.ForeignKey(
         User, related_name="comments_posted", on_delete=models.CASCADE)
+    review = models.ForeignKey(
+        Book, related_name="review_comments", on_delete=models.CASCADE)
     liked_by = models.ManyToManyField(User, related_name="comments_liked")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

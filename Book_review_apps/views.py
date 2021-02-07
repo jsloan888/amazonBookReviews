@@ -11,7 +11,9 @@ def success(request):
     if 'user_id' not in request.session:
         return redirect('/')
     context = {
-        "user": User.objects.get(id=request.session['user_id'])
+        "user": User.objects.get(id=request.session['user_id']),
+        "all_reviews": Book.objects.all(),
+        "all_comments": Comment.objects.all()
     }
     return render(request, 'success.html', context)
         
@@ -115,21 +117,18 @@ def revieweEdit(request, bookid):
         return redirect('/')
     return render(request, 'reviewEdit.html')
 
-# def like(request, userid, bookid):
-#     liked_book = Book.objects.get(id=bookid)
-#     liked_book.liked_by = request.session['userid']
-#     liked_book.save()
-#     return redirect(f'profile/{userid}')
-
-# def comment(request, userid, bookid):
-#     user = User.objects.get(id=userid)
-#     if request.method == 'POST':
-#         comment = Comment.objects.create(
-#            content=request.POST['content'],
-#            poster=user
-#         )
-#         return redirect(f'profile/{userid}')
-#     return redirect('/')
+def comment(request, userid, bookid):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    user = User.objects.get(id=userid)
+    if request.method == 'POST':
+        posted_comment = Comment.objects.create(
+           content=request.POST['comment_content'],
+           review=Book.objects.get(id=bookid),
+           poster=user
+        )
+        return redirect('/success')
+    return redirect('/')
 
 # def likeComment(request, userid, bookid):
 #     liked_comment = Comment.objects.get(id=bookid)
