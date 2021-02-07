@@ -117,12 +117,6 @@ def revieweEdit(request, bookid):
         return redirect('/')
     return render(request, 'reviewEdit.html')
 
-# def like(request, userid, bookid):
-#     liked_book = Book.objects.get(id=bookid)
-#     liked_book.liked_by = request.session['userid']
-#     liked_book.save()
-#     return redirect(f'profile/{userid}')
-
 def comment(request, userid, bookid):
     if 'user_id' not in request.session:
         return redirect('/')
