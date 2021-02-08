@@ -41,23 +41,33 @@
         <div class='one_post'>
           <h2>Reviews</h2>
             <div id='posts'>
-              {% for review in reviews %}
-              {% if review.posted_by.id == user.id %}
+              {% for book in books %}
+              {% if book.posted_by.id == user.id %}
               {{review.title}}
-                <p class='poster'>Review By: {{review.posted_by.f_name}} {{review.posted_by.l_name}} {{review.created_at}}</p>
-                <p>{{review.description}}</p>
-                <p class="likes">{number of likes} Likes</p>
-                <a href="/review/{{review.id}}">Delete this Review</a>
-                <a href="/review/{{review.id}}/edit">Edit this Review</a>
+                <p class='poster'>Review By: {{book.posted_by.f_name}} {{book.posted_by.l_name}} {{book.created_at}}</p>
+                <p>{{book.description}}</p>
+                <!-- <p class="likes">{number of likes} Likes</p> -->
+                <a href="/review/{{book.id}}">Delete this Review</a>
+                <a href="/review/{{book.id}}/edit">Edit this Review</a>
                 <div class='one_post'>
-                  <h5>Comments:</h5>
-                  <!-- NEED SQL FOR COMMENTS -->
                   <div id='posts'>
                       <p>{{comment.comment}}</p>
                       <p class='poster'>Posted by: {{comment.poster.first_name}} {{comment.poster.last_name}} {{comment.created_at}}</p>
-                      <a class='poster' href="/delete/{{comment.id}}">Delete Comment</a>
                   </div>
                 </div>
+              {% endif %}
+              {% endfor %}
+              <h5>Comments:</h5>
+              {% for book in books %}
+              {% if book.posted_by.id == user.id %}
+              {% for comment in comments %}
+              {% if comment.poster.id == user.id %}
+              <ul>
+                <li>{{comment.created_at}}:
+              <b>{{comment.content}}</b> for {{book.title}}'s review.<br> <a class='poster' href="/delete/{{comment.id}}">Delete Comment</a></li>
+              </ul>
+              {% endif %}
+              {% endfor %}
               {% endif %}
               {% endfor %}
             </div>
