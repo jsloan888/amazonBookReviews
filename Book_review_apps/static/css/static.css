@@ -37,3 +37,7 @@ h1 {
     font-size: 11pt;
     text-align: center;
 }
+
+.review-feed {
+    border: 1px solid black;
+}

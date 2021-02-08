@@ -55,7 +55,8 @@ def profile(request, userid):
         return redirect('/')
     context = {
         'user' : User.objects.get(id=userid),
-        'reviews' : Book.objects.all()
+        'books' : Book.objects.all(),
+        'comments' : Comment.objects.all()
     }
     return render(request, 'profile.html', context)
 
@@ -109,6 +110,14 @@ def deletereview(request,bookid):
         return redirect('/')
     review = Book.objects.get(id=bookid)
     if review.posted_by.id == request.session['user_id']:
+        review.delete()
+    return redirect(f"/profile/{request.session ['user_id']}")
+
+def deleteComment(request,com_id):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    review = Comment.objects.get(id=com_id)
+    if  review.poster.id == request.session['user_id']:
         review.delete()
     return redirect(f"/profile/{request.session ['user_id']}")
 

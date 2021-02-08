@@ -13,6 +13,7 @@ urlpatterns = [
     # path('profile/<int:userid>/<int:bookid>/edit', views.editReview),
     path('review/<int:bookid>', views.deletereview),
     path('review/<int:bookid>reviewedit', views.reviewEdit),
+    path('delete/<int:com_id>', views.deleteComment),
     path('profile/<int:userid>/<bookid>/comment', views.comment),
 
     #not working yet 
