@@ -90,18 +90,18 @@ def createReview(request, userid):
 #do we need to add timestamp to views?
 
 def editReview(request,bookid):
-    # bookUpdate = Book.objects.get(id=bookid)
-    # bookUpdate.description = request.POST['desc']
-    # bookUpdate.title = request.POST['name']
-    # bookUpdate.save()
-    # return redirect(f'profile/{userid}')
-
     if 'user_id' not in request.session:
         return redirect('/')
+    if request.method == 'GET':
+        context = {
+            'review' : Book.objects.get(id=bookid),
+        }
+        return render(request, 'reviewEdit.html')
     review = Book.objects.get(id=bookid)
-    review.title = request.POST['title']
-    review.description = request.POST['description']
-    review = review.save()
+    if review.posted_by.id == request.session['user_id']:
+        review.title = request.POST['title']
+        review.description = request.POST['description']
+        review = review.save()
     return redirect(f"/profile/{request.session ['user_id']}")
      
 def deletereview(request,bookid):
@@ -112,10 +112,7 @@ def deletereview(request,bookid):
         review.delete()
     return redirect(f"/profile/{request.session ['user_id']}")
 
-def revieweEdit(request, bookid):
-    if 'user_id' not in request.session:
-        return redirect('/')
-    return render(request, 'reviewEdit.html')
+# s
 
 def comment(request, userid, bookid):
     if 'user_id' not in request.session:
