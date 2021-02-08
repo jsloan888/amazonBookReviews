@@ -43,11 +43,11 @@
             <div id='posts'>
               {% for book in books %}
               {% if book.posted_by.id == user.id %}
-              {{review.title}}
+                <h5>{{book.title}}</h5>
                 <p class='poster'>Review By: {{book.posted_by.f_name}} {{book.posted_by.l_name}} {{book.created_at}}</p>
                 <p>{{book.description}}</p>
-                <!-- <p class="likes">{number of likes} Likes</p> -->
                 <a href="/review/{{book.id}}">Delete this Review</a>
+                <br>
                 <a href="/review/{{book.id}}/edit">Edit this Review</a>
                 <div class='one_post'>
                   <div id='posts'>
@@ -55,15 +55,11 @@
                       <p class='poster'>Posted by: {{comment.poster.first_name}} {{comment.poster.last_name}} {{comment.created_at}}</p>
                   </div>
                 </div>
-              {% endif %}
-              {% endfor %}
               <h5>Comments:</h5>
-              {% for book in books %}
-              {% if book.posted_by.id == user.id %}
               {% for comment in comments %}
-              {% if comment.poster.id == user.id %}
+              {% if comment.review.id == book.id %}
               <ul>
-                <li>{{comment.created_at}}:
+                <li>{{comment.created_at}}: {{comment.poster.f_name}} says
               <b>{{comment.content}}</b> for {{book.title}}'s review.<br> <a class='poster' href="/delete/{{comment.id}}">Delete Comment</a></li>
               </ul>
               {% endif %}
