@@ -30,10 +30,11 @@
     </div>
   </div>
     <div>
+      <a href="/profile/{{user.id}}" class="btn btn-secondary">Go Back</a>
         <form action="/review/{{book.id}}/edit" method="POST">
             {% csrf_token %}
-            <h4>Book Title:<input type="text" name="title" value="{{review.title}}" cols='30'></h4>
-            <h4>Your Thought:</h4><textarea name="description" rows="5" cols="55">{{review.description}} </textarea><br>
+            <h4>Book Title:<input type="text" name="title" value="{{book_review.title}}" cols='30'></h4>
+            <h4>Your Thought:</h4><textarea name="description" rows="5" cols="55">{{book_review.description}} </textarea><br>
             <button type="submit">Post Review</button>
         </form>
     </div>

@@ -94,15 +94,15 @@ def editReview(request,bookid):
         return redirect('/')
     if request.method == 'GET':
         context = {
-            'review' : Book.objects.get(id=bookid),
+            'book_review' : Book.objects.get(id=bookid)
         }
-        return render(request, 'reviewEdit.html')
+        return render(request, 'reviewEdit.html', context)
     review = Book.objects.get(id=bookid)
     if review.posted_by.id == request.session['user_id']:
         review.title = request.POST['title']
         review.description = request.POST['description']
         review = review.save()
-    return redirect(f"/profile/{request.session ['user_id']}")
+    return redirect(f"/profile/{request.session['user_id']}")
      
 def deletereview(request,bookid):
     if 'user_id' not in request.session:
@@ -111,8 +111,6 @@ def deletereview(request,bookid):
     if review.posted_by.id == request.session['user_id']:
         review.delete()
     return redirect(f"/profile/{request.session ['user_id']}")
-
-# s
 
 def comment(request, userid, bookid):
     if 'user_id' not in request.session:
