@@ -31,9 +31,15 @@
         </div>
     </div>
   </div>
+<<<<<<< HEAD
     <h3> {{user.f_name}} Edit Book Review Here!</h3>
     <div id="reviewedit">
         <form action="/review/{{book.id}}/edit" method="POST">
+=======
+    <div>
+      <a href="/profile/{{user.id}}" class="btn btn-secondary">Go Back</a>
+        <form action="/review/{{book_review.id}}/edit" method="POST">
+>>>>>>> ea6f80bc3737bd4dd4e7335370433f73d3898e49
             {% csrf_token %}
             <h4>Book Title:<input type="text" name="title" value="{{book_review.title}}" cols='30'></h4>
             <h4>Your Thought:</h4><textarea name="description" rows="5" cols="55">{{book_review.description}} </textarea><br>
