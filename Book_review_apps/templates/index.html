@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     {% load static %}
     <meta charset="UTF-8">
@@ -8,17 +7,19 @@
     <title>Login & Registration</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/static.css' %}">  
 </head>
-
 <body>
+    <h3>Welcome To Amazon Book Review!</h3> <br> <hr>
+    <div id="red">
+        <p>Thanks for visiting our Web app!</p>
+    </div>
     <div class="container">
-        <div class="row">
-        </div>
         <div class="row">
             <div class="col-sm-6">
                 <h2>Register</h2>
                 <div class="row col-sm-12">
-                    <form action="/register" method="POST">
+                    <form action="/register" method="POST" id="formreg">
                         {% csrf_token %}
                         <div class="row form-group">
                             {% if messages %}
@@ -68,7 +69,7 @@
                             <label class="col-sm-6" for="pw_confirm">Confirm:</label>
                             <input class="col-sm-6 form-control" type="password" name="pw_confirm">
                         </div>
-                        <div class="row form-group">
+                        <div id="reg">
                             <input class="col-sm-6" type="submit" value="Register">
                         </div>
                     </form>
@@ -76,8 +77,8 @@
             </div>
             <div class="col-sm-6">
                 <h2>Login</h2>
-                <div class="row col-sm-12">
-                    <form action="/login" method="POST">
+                <!-- <div class="row col-sm-12"> -->
+                    <form action="/login" method="POST" id="formlogin">
                         {% csrf_token %}
                         <div class="row form-group">
                             {% if messages %}
@@ -94,7 +95,7 @@
                             <label class="col-sm-6" for="password">Password:</label>
                             <input class="col-sm-6 form-control" type="password" name="password">
                         </div>
-                        <div class="row form-group">
+                        <div id="log">
                             <input class="col-sm-6" type="submit" value="Login">
                         </div>
                     </form>
@@ -102,6 +103,8 @@
             </div>
         </div>
     </div>
+    <div id="green">
+       <p>Thanks for visiting our web app!</p>
+    </div>
 </body>
-
 </html>

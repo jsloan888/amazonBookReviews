@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %} 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>review edit page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/static.css' %}"> 
 </head>
 <body>
-  <div class="container">
+  <div class="header">
     <div class="row">
         <div class="col-md-12">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="/success">Home</a>
                   <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/profile/{{user.id}}">Profile</a>
+                        <a class="navbar-brand" href="/profile/{{user.id}}">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/new/review/{{user.id}}">Post a New Review</a>
+                        <a class="navbar-brand" href="/new/review/{{user.id}}">New Review</a>
                       </li>
                     <li>
-                      <a class="nav-link" href="/logout">Logout</a>
+                      <a class="navbar-brand" href="/logout">Logout</a>
                     </li>
                   </ul>
                 </div>
@@ -29,11 +31,12 @@
         </div>
     </div>
   </div>
-    <div>
+    <h3> {{user.f_name}} Edit Book Review Here!</h3>
+    <div id="reviewedit">
         <form action="/review/{{book.id}}/edit" method="POST">
             {% csrf_token %}
-            <h4>Book Title:<input type="text" name="title" value="{{review.title}}" cols='30'></h4>
-            <h4>Your Thought:</h4><textarea name="description" rows="5" cols="55">{{review.description}} </textarea><br>
+            <h4>Book Title:<input type="text" name="title" value="{{book_review.title}}" cols='30'></h4>
+            <h4>Your Thought:</h4><textarea name="description" rows="5" cols="55">{{book_review.description}} </textarea><br>
             <button type="submit">Post Review</button>
         </form>
     </div>

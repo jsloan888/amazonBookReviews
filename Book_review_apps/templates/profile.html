@@ -8,59 +8,56 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">  
+    <link rel="stylesheet" href="{% static 'css/static.css' %}">  
 </head>
 <body>
-  <div class="container">
+  <div class="header">
     <div class="row">
         <div class="col-md-12">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="/success">Home</a>
                   <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/profile/{{user.id}}">Profile</a>
+                        <a class="navbar-brand" href="/profile/{{user.id}}">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/new/review/{{user.id}}">Post a New Review</a>
+                        <a class="navbar-brand" href="/new/review/{{user.id}}">New Review</a>
                       </li>
                     <li>
-                      <a class="nav-link" href="/logout">Logout</a>
+                      <a class="navbar-brand" href="/logout">Logout</a>
                     </li>
                   </ul>
-                </div>
-              </nav>
+            </nav>
         </div>
     </div>
-  </div>
     <div id='wrap'>
-        <h1>{{user.f_name}}'s Profile</h1>
-        <a href="/success" class="btn btn-secondary">Go Back</a>
-        <div id='posts'>
-        <div id='write'>
-        </div>
-        <div class='one_post'>
-          <h2>Reviews</h2>
+      {% csrf_token %}
+      <!-- <a href="/success" class="btn btn-secondary">Go Back</a> -->
+      <!-- <div class='one_post'> -->
+        <h1>{{user.f_name}}'s Reviews</h1>
+               <hr>
+            <!-- <div id='posts'> -->
+          {% for review in reviews %}
+          {% if review.posted_by.id == user.id %}
+          <div class="postwrap">
+            <p> Book Title:{{review.title}}</p>
+            <p>Review By: {{review.posted_by.f_name}} {{review.posted_by.l_name}} {{review.created_at}}</p>
+            <p>Review:{{review.description}}</p>
+            <!-- <p class="likes">{number of likes} Likes</p> -->
+            <a href="/review/{{review.id}}"><button>Delete</button></a>
+            <a href="/review/{{review.id}}/edit"><button>Edit Review</button></a>
+            <!-- NEED SQL FOR COMMENTS -->
+              <hr>
             <div id='posts'>
-              {% for review in reviews %}
-              {% if review.posted_by.id == user.id %}
-              {{review.title}}
-                <p class='poster'>Review By: {{review.posted_by.f_name}} {{review.posted_by.l_name}} {{review.created_at}}</p>
-                <p>{{review.description}}</p>
-                <p class="likes">{number of likes} Likes</p>
-                <a href="/review/{{review.id}}">Delete this Review</a>
-                <a href="/review/{{review.id}}/edit">Edit this Review</a>
-                <div class='one_post'>
-                  <h5>Comments:</h5>
-                  <!-- NEED SQL FOR COMMENTS -->
-                  <div id='posts'>
-                      <p>{{comment.comment}}</p>
-                      <p class='poster'>Posted by: {{comment.poster.first_name}} {{comment.poster.last_name}} {{comment.created_at}}</p>
-                      <a class='poster' href="/delete/{{comment.id}}">Delete Comment</a>
-                  </div>
-                </div>
-              {% endif %}
-              {% endfor %}
+              <h5>Comments:</h5>
+              <h5>{{comment.poster.f_name}} 
+              <p>{{comment.content}}</p></h5>
             </div>
-        </div>
+          </div>
+            <hr>
+          {% endif %}
+          {% endfor %}
+    </div>
+  </div>
 </body>
 </html>

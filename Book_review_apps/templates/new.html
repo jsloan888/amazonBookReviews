@@ -1,46 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Review</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/static.css' %}"> 
 </head>
+
 <body>
-  <div class="container">
+  <div class="header">
     <div class="row">
         <div class="col-md-12">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="/success">Home</a>
-                  <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/profile/{{user.id}}">Profile</a>
+                  <ul class=" nav navbar-nav">
+                    <li class="active">
+                        <a class="navbar-brand" href="/profile/{{user.id}}">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/new/review/{{user.id}}">Post a New Review</a>
+                        <a class="navbar-brand" href="/new/review/{{user.id}}">New Review</a>
                       </li>
                     <li>
-                      <a class="nav-link" href="/logout">Logout</a>
+                      <a class="navbar-brand" href="/logout">Logout</a>
                     </li>
                   </ul>
-                </div>
-              </nav>
+            </nav>
         </div>
     </div>
   </div>
+      <h3>{{user.f_name}}, you can post your review here!</h3>
+      {% comment %} <div id="blue">
+        Navigation
+    </div> {% endcomment %}
     <div id="addreview">
-      <h4>{{user.f_name}}, you can post your review here:</h4>
-      <p>Post the latest book you read. Did you like it?</p>
+      <h4>Post the latest book you read. Did you like it?</h4>
       <div>
           <form action="/profile/{{user.id}}/create" method="POST">
               {% csrf_token %}
               <h5>Book Title:<Title></Title> <input type="text" name="name" cols='35'></h5>
               <h5>Your Thought:</h5><textarea name="desc" rows="5" cols="55"></textarea><br>
-              <button type="submit">Post Review</button>
+              <button type="submit" id="postbutton">Post Review</button>
           </form>
           <!-- THIS PAGE NEEDS STYLING -->
       </div>
     </div>
+      {% comment %} <div id="black">
+       black
+    </div> {% endcomment %}
 </body>
 </html>
