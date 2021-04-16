@@ -12,10 +12,10 @@ urlpatterns = [
     path('review/<int:bookid>/edit', views.editReview),
     path('review/<int:bookid>', views.deletereview),
     path('profile/<int:userid>/<bookid>/comment', views.comment),
+    path('review/<int:bookid>/reviewedit', views.reviewEdit),
 
     #not working yet 
     # path('profile/<int:userid>/<int:bookid>/edit', views.editReview),
-    # path('review/<int:bookid>/reviewedit', views.reviewEdit),
     # path('profile/<int:userid>/<commentid>/deleteComment', views.deleteComment),
     #
 ]

@@ -54,9 +54,9 @@ class BookManager(models.Manager):
         errors = {}
 
         if len(postData['title']) < 1:
-            errors['title'] = "You must include a book title."
+            errors['reg_title'] = "You must include a book title."
         if len(postData['description']) < 5:
-            errors['description'] = "You must write a description of at least 5 characters."
+            errors['reg_description'] = "You must write a description of at least 5 characters."
 
         return errors
 

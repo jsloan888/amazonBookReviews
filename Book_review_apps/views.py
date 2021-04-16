@@ -55,7 +55,8 @@ def profile(request, userid):
         return redirect('/')
     context = {
         'user' : User.objects.get(id=userid),
-        'reviews' : Book.objects.all()
+        'reviews' : Book.objects.all(),
+        "all_comments": Comment.objects.all()
     }
     return render(request, 'profile.html', context)
 
@@ -67,25 +68,36 @@ def new(request, userid):
     }
     return render(request, 'new.html', context)
 
-def reviewEdit(request, bookid):
-    if 'user_id' not in request.session:
-        return redirect('/')
-    context = {
-        'user' : User.objects.get(id=request.session['user_id']),
-        'review' : Book.objects.filter(posted_by=request.session['user_id'])
-    }
-    return render(request, 'reviewEdit.html', context)
-
 def createReview(request, userid):
     user = User.objects.get(id=userid)
     if request.method == 'POST':
+        errors = Book.objects.book_val(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value, extra_tags=key)
+                return redirect(f'/new/review/{userid}')
         book = Book.objects.create(
-           title=request.POST['name'],
-           description=request.POST['desc'],
+           title=request.POST['title'],
+           description=request.POST['description'],
            posted_by=user
         )
         return redirect(f'/profile/{userid}')
     return redirect('/')
+
+
+def reviewEdit(request, bookid):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    errors = Book.objects.book_val(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value, extra_tags=key)
+        return redirect(f"/success")
+    review = Book.objects.get(id=bookid)
+    review.title = request.POST['title']
+    review.description = request.POST['description']
+    review = review.save()
+    return redirect(f"/success")
 
 #do we need to add timestamp to views?
 

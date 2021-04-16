@@ -40,9 +40,29 @@
       <div>
           <form action="/profile/{{user.id}}/create" method="POST">
               {% csrf_token %}
-              <h5>Book Title:<Title></Title> <input type="text" name="name" cols='35'></h5>
-              <h5>Your Thought:</h5><textarea name="desc" rows="5" cols="55"></textarea><br>
-              <button type="submit" id="postbutton">Post Review</button>
+              <div>
+                {% if messages %}
+                {% for message in messages %}
+                {% if message.extra_tags == "reg_title" %}
+                   <p class="col-sm-12 text-danger">{{message}}</p>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                <h5>Book Title:<Title></Title> <input type="text" name="title" cols='35'></h5>
+                <!-- <h5>Your Thought:</h5><textarea name="description" rows="5" cols="55"></textarea><br>
+                <button type="submit" id="postbutton">Post Review</button> -->
+              </div>
+              <div>
+                {% if messages %}
+                {% for message in messages %}
+                {% if message.extra_tags == "reg_description" %}
+                   <p class="col-sm-12 text-danger">{{message}}</p>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                <h5>Your Thought:</h5><textarea name="description" rows="5" cols="55"></textarea><br>
+                <button type="submit" id="postbutton">Post Review</button>
+              </div>
           </form>
           <!-- THIS PAGE NEEDS STYLING -->
       </div>
