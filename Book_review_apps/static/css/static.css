@@ -153,7 +153,7 @@ body {
 
 #green {
     background-color: rgb(187, 214, 187);
-    height: 500px;
+    height: 300px;
     width: 150px;
     display: inline-block;
     margin-left: 80px;
@@ -161,7 +161,7 @@ body {
 }
 #red {
     background-color: rgb(187, 214, 187);
-    height: 500px;
+    height: 300px;
     width: 150px;
     display: inline-block;
     margin-left: 45px;
